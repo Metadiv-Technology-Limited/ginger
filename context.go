@@ -33,6 +33,13 @@ type IContext[T any] interface {
 	SetHasResp(bool)
 	GetIsFile() bool
 	SetIsFile(bool)
+	BearerToken() string
+	ClientIP() string
+	UserAgent() string
+	OK(data any, page ...models.IPagination)
+	OKFile(bytes []byte, filename ...string)
+	OKDownload(bytes []byte, filename ...string)
+	Err(code string, locale ...string)
 }
 
 func NewContext[T any](engine IEngine, ginCtx *gin.Context) IContext[T] {
