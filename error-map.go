@@ -16,15 +16,22 @@ func RegisterError(code, message string, locale ...string) {
 	errMapObj[locale[0]][code] = message
 }
 
-func (e errMap) GetError(code, locale string) IError {
-	if _, ok := e[locale]; !ok {
-		locale = defaultLocale
+func (e errMap) GetError(code string, locale ...string) IError {
+	if len(locale) == 0 {
+		locale = append(locale, defaultLocale)
 	}
-	if _, ok := e[locale][code]; !ok {
-		code = "default"
+	if _, ok := errMapObj[locale[0]]; !ok {
+		return &Error{
+			Code: code,
+		}
+	}
+	if _, ok := errMapObj[locale[0]][code]; !ok {
+		return &Error{
+			Code: code,
+		}
 	}
 	return &Error{
 		Code:    code,
-		Message: e[locale][code],
+		Message: errMapObj[locale[0]][code],
 	}
 }
