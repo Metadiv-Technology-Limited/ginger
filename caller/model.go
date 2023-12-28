@@ -1,7 +1,7 @@
 package caller
 
 import (
-	"ginger"
+	"github.com/Metadiv-Technology-Limited/ginger"
 
 	"github.com/Metadiv-Technology-Limited/sql/models"
 )

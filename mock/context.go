@@ -1,8 +1,9 @@
 package mock
 
 import (
-	"ginger"
 	"net/http/httptest"
+
+	"github.com/Metadiv-Technology-Limited/ginger"
 
 	"github.com/Metadiv-Technology-Limited/sql/models"
 	"github.com/gin-gonic/gin"

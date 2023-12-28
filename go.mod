@@ -1,4 +1,4 @@
-module ginger
+module github.com/Metadiv-Technology-Limited/ginger
 
 go 1.21.5
 

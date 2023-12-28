@@ -1,11 +1,12 @@
 package ginger
 
 import (
-	"ginger/util"
 	"log"
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/Metadiv-Technology-Limited/ginger/util"
 
 	"github.com/Metadiv-Technology-Limited/nanoid"
 	"github.com/Metadiv-Technology-Limited/sql/models"
