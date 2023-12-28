@@ -3,6 +3,7 @@ module ginger
 go 1.21.5
 
 require (
+	github.com/Metadiv-Technology-Limited/sql v1.0.1
 	github.com/gin-gonic/gin v1.9.1
 	github.com/robfig/cron v1.2.0
 )
