@@ -2,9 +2,9 @@ package ginger
 
 import "github.com/gin-gonic/gin"
 
-type ApiService[T any] func(ctx IContext[T])
+type Service[T any] func(ctx IContext[T])
 
-type ApiHandler[T any] ApiService[T]
+type Handler[T any] Service[T]
 
 func ApiServiceToGinHandler[T any](engine IEngine, service func(ctx IContext[T])) gin.HandlerFunc {
 	return func(ctx *gin.Context) {

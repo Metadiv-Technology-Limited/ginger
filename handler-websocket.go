@@ -7,10 +7,6 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-type WsService[T any] func(ctx IContext[T])
-
-type WsHandler[T any] func() WsService[T]
-
 func WsServiceToGinHandler[T any](engine IEngine, service func(ctx IContext[T])) gin.HandlerFunc {
 	wsUpGrader := websocket.Upgrader{
 		CheckOrigin: func(r *http.Request) bool {
