@@ -59,6 +59,9 @@ type CorsConfig struct {
 	OptionsResponseStatusCode int
 }
 
+/*
+CORS setup cors middleware
+*/
 func CORS(config CorsConfig) gin.HandlerFunc {
 	return cors.New(cors.Config{
 		AllowAllOrigins:           config.AllowAllOrigins,
