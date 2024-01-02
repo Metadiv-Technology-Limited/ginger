@@ -40,6 +40,9 @@ type IContext[T any] interface {
 	OKFile(bytes []byte, filename ...string)
 	OKDownload(bytes []byte, filename ...string)
 	Err(code string, locale ...string)
+	InternalServerError(msg ...string)
+	Forbidden(msg ...string)
+	Unauthorized(msg ...string)
 }
 
 func NewContext[T any](engine IEngine, ginCtx *gin.Context) IContext[T] {
@@ -228,6 +231,45 @@ func (ctx *Context[T]) Err(code string, locale ...string) {
 		Success:  false,
 		Duration: time.Since(ctx.GetStartAt()).Milliseconds(),
 		Error:    errMapObj.GetError(code, locale...),
+	})
+	ctx.SetHasResp(true)
+}
+
+func (ctx *Context[T]) InternalServerError(msg ...string) {
+	if ctx.GetHasResp() {
+		log.Println("Warning: context already responded")
+		return
+	}
+	ctx.SetResponse(&Response{
+		Success:  false,
+		Duration: time.Since(ctx.GetStartAt()).Milliseconds(),
+		Error:    &Error{Code: "INTERNAL_SERVER_ERROR", Message: strings.Join(msg, " ")},
+	})
+	ctx.SetHasResp(true)
+}
+
+func (ctx *Context[T]) Forbidden(msg ...string) {
+	if ctx.GetHasResp() {
+		log.Println("Warning: context already responded")
+		return
+	}
+	ctx.SetResponse(&Response{
+		Success:  false,
+		Duration: time.Since(ctx.GetStartAt()).Milliseconds(),
+		Error:    &Error{Code: "FORBIDDEN", Message: strings.Join(msg, " ")},
+	})
+	ctx.SetHasResp(true)
+}
+
+func (ctx *Context[T]) Unauthorized(msg ...string) {
+	if ctx.GetHasResp() {
+		log.Println("Warning: context already responded")
+		return
+	}
+	ctx.SetResponse(&Response{
+		Success:  false,
+		Duration: time.Since(ctx.GetStartAt()).Milliseconds(),
+		Error:    &Error{Code: "UNAUTHORIZED", Message: strings.Join(msg, " ")},
 	})
 	ctx.SetHasResp(true)
 }
