@@ -18,9 +18,9 @@ type IResponse interface {
 type Response struct {
 	Success    bool               `json:"success"`
 	Duration   int64              `json:"duration"`
-	Pagination models.IPagination `json:"pagination"`
-	Error      IError             `json:"error"`
-	Data       any                `json:"data"`
+	Pagination models.IPagination `json:"pagination,omitempty"`
+	Error      IError             `json:"error,omitempty"`
+	Data       any                `json:"data,omitempty"`
 }
 
 func (r *Response) GetSuccess() bool {
