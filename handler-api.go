@@ -38,6 +38,21 @@ func ApiServiceToGinHandler[T any](engine IEngine, service func(ctx IContext[T])
 			return
 		}
 
+		if c.GetResponse().GetError().GetCode() == "INTERNAL_SERVER_ERROR" {
+			ctx.JSON(500, c.GetResponse())
+			return
+		}
+
+		if c.GetResponse().GetError().GetCode() == "UNAUTHORIZED" {
+			ctx.JSON(401, c.GetResponse())
+			return
+		}
+
+		if c.GetResponse().GetError().GetCode() == "FORBIDDEN" {
+			ctx.JSON(403, c.GetResponse())
+			return
+		}
+
 		// error
 		ctx.JSON(400, c.GetResponse())
 	}
