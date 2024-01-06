@@ -18,6 +18,13 @@ type Engine struct {
 	Cron *cron.Cron
 }
 
+func NewEngine() *Engine {
+	return &Engine{
+		Gin:  gin.New(),
+		Cron: cron.New(),
+	}
+}
+
 func (e *Engine) GetGin() *gin.Engine {
 	return e.Gin
 }
