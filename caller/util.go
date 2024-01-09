@@ -16,7 +16,9 @@ func get[T any](ctx *gin.Context, host string, path string,
 	if headers == nil {
 		headers = make(map[string]string)
 	}
-	headers["Authorization"] = getAuthToken(ctx)
+	if ctx != nil {
+		headers["Authorization"] = getAuthToken(ctx)
+	}
 
 	path += "?"
 	for k, v := range params {
@@ -57,7 +59,9 @@ func nonGet[T any](ctx *gin.Context, host, path, method string,
 	if headers == nil {
 		headers = make(map[string]string)
 	}
-	headers["Authorization"] = getAuthToken(ctx)
+	if ctx != nil {
+		headers["Authorization"] = getAuthToken(ctx)
+	}
 
 	b, err := json.Marshal(body)
 	if err != nil {
